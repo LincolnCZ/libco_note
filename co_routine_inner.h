@@ -53,6 +53,8 @@ struct stShareStack_t
 //协程
 struct stCoRoutine_t
 {
+    /*不同于 Go 语言，libco 的协程一旦创建之后便跟创建时的那个线程绑定了的，是不支持在不同线程间迁移（migrate）的。这个 env，即同属于一个线程
+     * 所有协程的执行环境，包括了当前运行协程、上次切换挂起的协程、嵌套调用的协程栈，和一个 epoll 的封装结构（TBD）。*/
 	stCoRoutineEnv_t *env;  // 协程所在的运行环境，可以理解为，该协程所属的协程管理器
 	
 	pfn_co_routine_t pfn; // 协程所对应的函数
