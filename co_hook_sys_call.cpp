@@ -610,7 +610,7 @@ ssize_t recv( int socket, void *buffer, size_t length, int flags )
 extern int co_poll_inner( stCoEpoll_t *ctx,struct pollfd fds[], nfds_t nfds, int timeout, poll_pfn_t pollfunc);
 
 /*
-* poll是libco中的一个核心函数，其作用不仅仅在于对poll的wrapper，而且被所有的其他函数调用，将其注入到epoll中
+* poll 是 libco 中的一个核心函数，其作用不仅仅在于对 poll 的 wrapper，而且被所有的其他函数调用，将其注入到 epoll 中
 * 
 */
 int poll(struct pollfd fds[], nfds_t nfds, int timeout)

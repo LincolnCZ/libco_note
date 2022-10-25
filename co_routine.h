@@ -38,7 +38,7 @@ struct stCoRoutineAttr_t
 	stShareStack_t*  share_stack;
 	stCoRoutineAttr_t()
 	{
-		// 默认是128*1024
+		// 默认是 128*1024
 		stack_size = 128 * 1024; 
 		// 默认不是共享栈
 		share_stack = NULL;

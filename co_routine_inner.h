@@ -28,8 +28,8 @@ struct stCoSpec_t
 };
 
 /**
-* 一个共享栈的，这里就是共享栈的内存所在了
-* 一个进程或者线程栈的地址，是从高位到低位安排数据的，所以stack_bp是栈底，stack_buffer是栈顶
+* 协程栈：一个共享栈的，这里就是共享栈的内存所在了；每个协程也可以使用独立栈
+* 一个进程或者线程栈的地址，是从高位到低位安排数据的，所以 stack_bp 是栈底，stack_buffer 是栈顶
 */
 struct stStackMem_t
 {
@@ -44,10 +44,10 @@ struct stStackMem_t
 */
 struct stShareStack_t
 {
-	unsigned int alloc_idx; // 应该是目前正在使用的那个共享栈的index
-	int stack_size; // 共享栈的大小，这里的大小指的是一个stStackMem_t*的大小
+	unsigned int alloc_idx; // 应该是目前正在使用的那个共享栈的 index
+	int stack_size; // 共享栈的大小，这里的大小指的是一个 stStackMem_t* 的大小
 	int count;   // 共享栈的个数，共享栈可以为多个，所以以下为共享栈的数组
-	stStackMem_t** stack_array; //栈的内容，这里是个数组，元素是stStackMem_t*
+	stStackMem_t** stack_array; //栈的内容，这里是个数组，元素是 stStackMem_t*
 };
 
 //协程
@@ -60,8 +60,8 @@ struct stCoRoutine_t
 	pfn_co_routine_t pfn; // 协程所对应的函数
 	void *arg; // 函数参数
 	coctx_t ctx; // 协程上下文，包括寄存器和栈
- 
-	// 以下用char表示了bool语义，节省空间
+
+	// 以下用 char 表示了 bool 语义，节省空间
 	char cStart;          // 是否已经开始运行了
 	char cEnd;            // 是否已经结束
 	char cIsMain;         // 是否是主协程
@@ -75,9 +75,9 @@ struct stCoRoutine_t
 
 
 	//save satck buffer while conflict on same stack_buffer;
-	char* stack_sp; // rsp,栈顶
-	unsigned int save_size; // save_buffer的长度
-	char* save_buffer; // 当协程挂起时，栈的内容会栈暂存到save_buffer中
+	char* stack_sp; // rsp，栈顶
+	unsigned int save_size; // save_buffer 的长度
+	char* save_buffer; // 当协程挂起时，栈的内容会栈暂存到 save_buffer 中
 
 	stCoSpec_t aSpec[1024]; 
 };
